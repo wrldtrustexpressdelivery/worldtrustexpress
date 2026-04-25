@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>World Trust Express - Fast & Reliable Shipment Service</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="images/favicon.svg" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@300;400;500&display=swap">
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Fast & Reliable Shipment Service" />
+    <meta property="og:description" content="Connecting people, one shipment at a time." />
+    <meta property="og:image" content="https://res.cloudinary.com/drzqblj9k/image/upload/v1777108417/OG_dviukq.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://worldtrustexpress.vercel.app/" />
+    <meta property="og:site_name" content="World Trust Express" />
+
+    <!-- Twitter Card (optional but recommended) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fast & Reliable Shipment Service" />
+    <meta name="twitter:description" content="Connecting people, one shipment at a time." />
+    <meta name="twitter:image" content="https://res.cloudinary.com/drzqblj9k/image/upload/v1777108417/OG_dviukq.png" />
+
+    <style>
+      /* Chat Floating Button */
+      .chat-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #c87e0e;
+        color: #fff;
+        border: none;
+        border-radius: 1rem;
+        width: 60px;
+        height: 60px;
+        font-size: 22px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: background 0.3s;
+        z-index: 1000;
+      }
+      .chat-btn:hover { background: #0c0c0c; }
+
+      /* Popup Overlay */
+      .chat-popup {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      /* Chat Box */
+      .chat-content {
+        position: relative;
+        width: 40%;
+        height: 80%;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      @media (max-width: 768px) {
+        .chat-content { width: 90%; height: 85%; }
+      }
+
+      /* Close Button */
+      .close-btn {
+       position: absolute;
+    top: 10px;
+    right: 18px;
+    background: #c87e0e;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;}
+
+      .chat-content iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Email Section Styles */
+      .email-section {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      
+      .email-icon {
+        font-size: 48px;
+        color: #c87e0e;
+        margin-bottom: 20px;
+      }
+      
+      .email-address {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 30px;
+        word-break: break-all;
+      }
+      
+      .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      
+      .btn-email {
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .btn-copy {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+      }
+      
+      .btn-copy:hover {
+        background-color: #5a6268;
+        color: white;
+      }
+      
+      .btn-send {
+        background-color: #c87e0e;
+        color: white;
+        text-decoration: none;
+      }
+      
+      .btn-send:hover {
+        background-color: #c87e0e;
+        color: white;
+      }
+      
+      .btn-chat {
+        background-color: transparent;
+        border: 2px solid #c87e0e;
+        color: #c87e0e;
+      }
+      
+      .btn-chat:hover {
+        background-color: #c87e0e;
+        color: white;
+      }
+      
+      .toast {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 4px;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      .toast.show {
+        opacity: 1;
+      }
+      
+      #googleTranslator { 
+        position: fixed; 
+        bottom: 20px; 
+        left: 20px; 
+        z-index: 9999; 
+      }
+      
+      #google_translate_element select { 
+        padding: 4px 8px; 
+        border-radius: 6px; 
+        border: 1px solid #ccc; 
+      }
+
+
+
+#languageSelector {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+}
+
+.language-btn {
+  background: #c87e0e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-btn:hover {
+  background: #0c0c0c;
+  transform: scale(1.1);
+}
+
+.language-dropdown {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  padding: 10px 0;
+  min-width: 180px;
+  display: none;
+  z-index: 10000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.language-dropdown.show {
+  display: block;
+}
+
+.language-option {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333;
+  text-align: left;
+  border: none;
+  background: none;
+  width: 100%;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.language-option:hover {
+  background: #f5f5f5;
+}
+
+.language-option.active {
+  background: #c87e0e;
+  color: white;
+}
+
+.language-flag {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* ===== TAWK.TO STYLES ===== */
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+  z-index: 9999;
+}
+.chat-btn:hover {
+  background: #0c0c0c;
+}
+
+.chat-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.chat-content {
+  position: relative;
+  width: 40%;
+  height: 80%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .chat-content {
+    width: 90%;
+    height: 85%;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Prevent Google Translate from breaking Tawk.to */
+.notranslate {
+  -webkit-translate: none !important;
+  translate: none !important;
+}
+
+/* Hide Google Translate elements */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <div class="page">
+      <!-- Header -->
+      <header class="section page-header">
+        <!--RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            
+
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!--RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!--RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                  <!--RD Navbar Brand-->
+                  <div class="rd-navbar-brand" style="width: 320px;">
+                    <!--Brand--><a class="brand" href="/"><img class="brand-logo-dark" src="images/logo-default-250x85.png" alt="" width="320" height="80"/><img class="brand-logo-light" src="images/logo-inverse-250x85.png" alt="" width="320" height="80"/></a>
+                  </div>
+                </div>
+                <div class="rd-navbar-main-element">
+                  <div class="rd-navbar-nav-wrap">
+                    <ul class="rd-navbar-nav">
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/">Home</a></li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/about">About</a></li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/services">Services</a></li>
+                      <li class="rd-nav-item  active"><a class="rd-nav-link" href="/contacts">Contacts</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Contact Section -->
+      <section class="section section-lg">
+        <div class="container d-flex justify-content-center">
+          <div class="col-lg-8 col-12">
+            <div class="email-section wow fadeInUp" data-wow-delay="0.1s">
+              <div class="email-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h2 class="mb-4">Contacts</h2>
+              <p class="mb-4">Want to reach out to us? Use the buttons below to quickly compose a message or start a live chat.</p>
+              
+              <div class="email-address" id="emailAddress">
+                wrldtrustexpress@proton.me
+              </div>
+              
+              <div class="action-buttons">
+                <button class="btn btn-email btn-copy" id="copyEmailBtn">
+                  <i class="fas fa-copy"></i> Copy Email
+                </button>
+                
+                <a href="mailto:wrldtrustexpress@proton.me" class="btn btn-email btn-send">
+                  <i class="fas fa-paper-plane"></i> Compose Message
+                </a>
+                
+                <button class="btn btn-email btn-chat" id="openChatFromContact">
+                  <i class="fas fa-comment-dots"></i> Live Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Toast Notification -->
+      <div class="toast" id="copyToast">Email address copied to clipboard!</div>
+
+      <!-- Footer -->
+      <footer class="section footer-classic context-dark">
+        <div class="container">
+          <div class="row row-30 justify-content-center align-items-center">
+            <div class="col-lg-3 col-md-12 text-center text-lg-start">
+              <a class="brand" href="/">
+                <img class="brand-logo-dark" src="images/logo-default-250x85.png" alt="" width="320" height="80"/>
+                <img class="brand-logo-light" src="images/logo-inverse-250x85.png" alt="" width="320" height="80"/>
+              </a>
+            </div>
+            <div class="col-lg-3 col-md-4">
+              <div class="contact-detail">
+                <div class="detail-icon icon linearicons-map-marker"></div>
+                <div class="detail-info"><span>Email:</span><a href="mailto:#">wrldtrustexpress@proton.me</a></div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4">
+              <div class="contact-detail">
+                <div class="detail-icon icon linearicons-clock3"></div>
+                <div class="detail-info"><span>Opening Hours:</span><span class="text-white">Mon. - Fri. 9:00 - 18:00</span></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="divider"></div>
+            </div>
+          </div>
+          <div class="row row-50">
+            <div class="col-lg-3 col-sm-6">
+              <h6 class="heading-5">About World Trust Express</h6>
+              <p class="text-gray-4">
+                Since 1995, World Trust Express has delivered reliable logistics solutions worldwide.
+                Headquartered in Belgium, we specialize in freight forwarding and heavy cargo, 
+                backed by a team of experienced professionals committed to efficiency and trust.
+              </p>
+            </div>
+            <div class="col-lg-3 col-sm-6 d-sm-flex flex-column align-items-left align-items-lg-center">
+              <h6 class="heading-5">Quick links</h6>
+              <ul class="list-marked-2">
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contacts">Contacts</a></li>
+              </ul>
+            </div>
+            <div class="col-12 fadeInLeft">
+              <p class="rights">
+                <span>&copy; <span class="copyright-year"></span> World Trust Express.</span> 
+                All Rights Reserved. <a href="privacy-policy.html">Privacy Policy</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Floating Live Chat Button -->
+    <button id="openChat" class="chat-btn">
+      <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <!-- Chat Popup -->
+    <div id="chatPopup" class="chat-popup">
+      <div class="chat-content">
+        <button id="closeChat" class="close-btn">&times;</button>
+        <iframe src="https://tawk.to/chat/69ec7fee5e9d251c32b388bb/1jn1t7fl8" frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Copy email functionality
+      const copyEmailBtn = document.getElementById('copyEmailBtn');
+      const copyToast = document.getElementById('copyToast');
+      
+      copyEmailBtn.addEventListener('click', () => {
+        const email = 'wrldtrustexpress@proton.me';
+        
+        // Using the modern Clipboard API
+        navigator.clipboard.writeText(email).then(() => {
+          // Show success toast
+          copyToast.textContent = 'Email address copied to clipboard!';
+          copyToast.classList.add('show');
+          
+          // Hide toast after 3 seconds
+          setTimeout(() => {
+            copyToast.classList.remove('show');
+          }, 3000);
+        }).catch(err => {
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = email;
+          document.body.appendChild(textArea);
+          textArea.select();
+          
+          try {
+            document.execCommand('copy');
+            copyToast.textContent = 'Email address copied to clipboard!';
+            copyToast.classList.add('show');
+            
+            setTimeout(() => {
+              copyToast.classList.remove('show');
+            }, 3000);
+          } catch (err) {
+            copyToast.textContent = 'Failed to copy email address';
+            copyToast.classList.add('show');
+            
+            setTimeout(() => {
+              copyToast.classList.remove('show');
+            }, 3000);
+          }
+          
+          document.body.removeChild(textArea);
+        });
+      });
+
+      // Chat controls
+      const chatPopup = document.getElementById('chatPopup');
+      document.getElementById('openChat').onclick = () => chatPopup.style.display = 'flex';
+      document.getElementById('closeChat').onclick = () => chatPopup.style.display = 'none';
+      document.getElementById('openChatFromContact').onclick = () => chatPopup.style.display = 'flex';
+    });
+    </script>
+
+<!-- Language Selector -->
+<div id="languageSelector" class="notranslate">
+  <button id="languageBtn" class="language-btn">
+    <i class="fas fa-globe"></i>
+  </button>
+  <div id="languageDropdown" class="language-dropdown">
+    <button class="language-option active" data-lang="en">
+      <span class="language-flag">🇺🇸</span> English
+    </button>
+    <button class="language-option" data-lang="fr">
+      <span class="language-flag">🇫🇷</span> Français
+    </button>
+    <button class="language-option" data-lang="es">
+      <span class="language-flag">🇪🇸</span> Español
+    </button>
+    <button class="language-option" data-lang="de">
+      <span class="language-flag">🇩🇪</span> Deutsch
+    </button>
+    <button class="language-option" data-lang="it">
+      <span class="language-flag">🇮🇹</span> Italiano
+    </button>
+    <button class="language-option" data-lang="pt">
+      <span class="language-flag">🇵🇹</span> Português
+    </button>
+    <button class="language-option" data-lang="nl">
+      <span class="language-flag">🇳🇱</span> Nederlands
+    </button>
+    <button class="language-option" data-lang="ru">
+      <span class="language-flag">🇷🇺</span> Русский
+    </button>
+    <button class="language-option" data-lang="zh">
+      <span class="language-flag">🇨🇳</span> 中文
+    </button>
+    <button class="language-option" data-lang="ja">
+      <span class="language-flag">🇯🇵</span> 日本語
+    </button>
+    <button class="language-option" data-lang="ko">
+      <span class="language-flag">🇰🇷</span> 한국어
+    </button>
+    <button class="language-option" data-lang="ar">
+      <span class="language-flag">🇸🇦</span> العربية
+    </button>
+    <button class="language-option" data-lang="hi">
+      <span class="language-flag">🇮🇳</span> हिन्दी
+    </button>
+    <button class="language-option" data-lang="tr">
+      <span class="language-flag">🇹🇷</span> Türkçe
+    </button>
+  </div>
+</div>
+
+<!-- ===== LANGUAGE SELECTOR SCRIPT ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Language Selector Elements
+  const languageBtn = document.getElementById('languageBtn');
+  const languageDropdown = document.getElementById('languageDropdown');
+  const languageOptions = document.querySelectorAll('.language-option');
+  
+// Complete list of supported languages (matching your HTML)
+const supportedLanguages = {
+    'en': 'English',
+    'fr': 'Français',
+    'es': 'Español',
+    'de': 'Deutsch',      // German 🇩🇪
+    'it': 'Italiano',
+    'pt': 'Português',
+    'nl': 'Nederlands',   // Dutch 🇳🇱
+    'ru': 'Русский',
+    'zh': '中文',
+    'ja': '日本語',
+    'ko': '한국어',
+    'ar': 'العربية',
+    'hi': 'हिन्दी',
+    'tr': 'Türkçe'
+};
+
+// Google Translate language codes mapping
+const googleLangCodes = {
+    'en': 'en',
+    'fr': 'fr',
+    'es': 'es',
+    'de': 'de',           // German maps to 'de'
+    'it': 'it',
+    'pt': 'pt',
+    'nl': 'nl',           // Dutch maps to 'nl'
+    'ru': 'ru',
+    'zh': 'zh-CN',        // Chinese Simplified
+    'ja': 'ja',
+    'ko': 'ko',
+    'ar': 'ar',
+    'hi': 'hi',
+    'tr': 'tr'
+};
+  // Toggle dropdown
+  if (languageBtn) {
+    languageBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('show');
+    });
+  }
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function() {
+    languageDropdown.classList.remove('show');
+  });
+  
+  // Prevent dropdown from closing when clicking inside
+  if (languageDropdown) {
+    languageDropdown.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+  
+  // Language selection
+  if (languageOptions.length > 0) {
+    languageOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        
+        // Update active state
+        languageOptions.forEach(opt => opt.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Translate page
+        translatePage(lang);
+        
+        // Close dropdown
+        languageDropdown.classList.remove('show');
+        
+        // Save preference
+        localStorage.setItem('preferredLanguage', lang);
+      });
+    });
+  }
+  
+  // Tawk.to Chat Elements
+  const openChatBtn = document.getElementById('openChat');
+  const closeChatBtn = document.getElementById('closeChat');
+  const chatPopup = document.getElementById('chatPopup');
+  
+  // Chat functionality
+  if (openChatBtn && chatPopup) {
+    openChatBtn.addEventListener('click', () => {
+      chatPopup.style.display = 'flex';
+    });
+  }
+  
+  if (closeChatBtn && chatPopup) {
+    closeChatBtn.addEventListener('click', () => {
+      chatPopup.style.display = 'none';
+    });
+  }
+  
+  // Close chat when clicking outside
+  if (chatPopup) {
+    chatPopup.addEventListener('click', (e) => {
+      if (e.target === chatPopup) {
+        chatPopup.style.display = 'none';
+      }
+    });
+  }
+  
+  // Translation system
+  let googleTranslateInitialized = false;
+  
+  function translatePage(targetLang) {
+    // Convert to Google Translate language code if needed
+    const googleLang = googleLangCodes[targetLang] || targetLang;
+    
+    // If Google Translate is already initialized, change language
+    if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = googleLang;
+        select.dispatchEvent(new Event('change'));
+        return;
+      }
+    }
+    
+    // Initialize Google Translate for the first time
+    if (!googleTranslateInitialized) {
+      initializeGoogleTranslate(googleLang);
+      googleTranslateInitialized = true;
+    }
+  }
+  
+  function initializeGoogleTranslate(targetLang) {
+    // Remove any existing Google Translate elements
+    const existingElement = document.getElementById('google_translate_element');
+    if (existingElement) {
+      existingElement.remove();
+    }
+    
+    // Create Google Translate div (hidden)
+    const translateDiv = document.createElement('div');
+    translateDiv.id = 'google_translate_element';
+    translateDiv.style.display = 'none';
+    document.body.appendChild(translateDiv);
+    
+    // Load Google Translate script if not already loaded
+    if (!document.querySelector('script[src*="translate.google.com"]')) {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.head.appendChild(script);
+    } else {
+      // If already loaded, call init directly
+      if (window.google && window.google.translate) {
+        googleTranslateElementInit();
+      }
+    }
+    
+    // Initialize function
+    window.googleTranslateElementInit = function() {
+      if (!window.google || !window.google.translate) {
+        console.error('Google Translate failed to load');
+        return;
+      }
+      
+      // Create comma-separated list of all supported languages
+      const allLangCodes = Object.values(googleLangCodes).join(',');
+      
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: allLangCodes,
+        layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+        autoDisplay: false
+      }, 'google_translate_element');
+      
+      // Set to target language after a delay
+      setTimeout(() => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = targetLang;
+          select.dispatchEvent(new Event('change'));
+        }
+      }, 500);
+      
+      // Hide Google Translate banner and toolbar
+      const style = document.createElement('style');
+      style.textContent = `
+        .goog-te-banner-frame, 
+        .goog-te-menu-value, 
+        .goog-te-gadget,
+        .goog-te-menu-value span,
+        .goog-te-menu-value img {
+          display: none !important;
+        }
+        body {
+          top: 0px !important;
+        }
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+          display: none !important;
+        }
+        .goog-te-spinner-pos {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+  }
+  
+  // Check for saved language preference
+  function checkSavedLanguage() {
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang && savedLang !== 'en') {
+      // Find and click the corresponding language option
+      languageOptions.forEach(option => {
+        if (option.getAttribute('data-lang') === savedLang) {
+          option.click();
+        }
+      });
+    }
+  }
+  
+  // Auto-detect browser language
+  function detectBrowserLanguage() {
+    const browserLang = navigator.language || navigator.userLanguage;
+    const supportedLangs = Object.keys(supportedLanguages);
+    
+    // Check if browser language is supported and not English
+    const baseLang = browserLang.split('-')[0];
+    if (supportedLangs.includes(baseLang) && baseLang !== 'en') {
+      // Only auto-translate if user hasn't made a choice
+      if (!localStorage.getItem('preferredLanguage')) {
+        setTimeout(() => {
+          languageOptions.forEach(option => {
+            if (option.getAttribute('data-lang') === baseLang) {
+              option.click();
+            }
+          });
+        }, 1000);
+      }
+    }
+  }
+  
+  // Set active state based on saved language on page load
+  function setInitialActiveState() {
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang) {
+      languageOptions.forEach(option => {
+        if (option.getAttribute('data-lang') === savedLang) {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+    } else {
+      // Default to English active
+      languageOptions.forEach(option => {
+        if (option.getAttribute('data-lang') === 'en') {
+          option.classList.add('active');
+        }
+      });
+    }
+  }
+  
+  // Initialize on page load
+  setInitialActiveState();
+  
+  setTimeout(() => {
+    checkSavedLanguage();
+    detectBrowserLanguage();
+  }, 500);
+});
+</script>
+  </body>
+</html>

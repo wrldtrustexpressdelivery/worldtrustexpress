@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>World Trust Express - Fast & Reliable Shipment Servic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&amp;family=Roboto:wght@300;400;500&amp;display=swap">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+      <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+      <!-- Open Graph Meta Tags -->
+<meta property="og:title" content="Fast & Reliable Shipment Service" />
+<meta property="og:description" content="Connecting people, one shipment at a time." />
+<meta property="og:image" content="https://res.cloudinary.com/drzqblj9k/image/upload/v1777108417/OG_dviukq.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://worldtrustexpress.vercel.app/" />
+<meta property="og:site_name" content="World Trust Express" />
+
+<!-- Twitter Card (optional but recommended) -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Fast & Reliable Shipment Service" />
+<meta name="twitter:description" content="Connecting people, one shipment at a time." />
+<meta name="twitter:image" content="https://res.cloudinary.com/drzqblj9k/image/upload/v1777108417/OG_dviukq.png" />
+    
+    
+    <!-- Modern CSS Overrides -->
+    <style>
+      :root {
+        --primary: #0c0c0c;
+        --primary-dark: #000000;
+        --secondary: #f8f9fa;
+        --accent: #c87e0e;
+        --dark: #212529;
+        --light: #f8f9fa;
+        --gray: #6c757d;
+        --transition: all 0.3s ease;
+      }
+      
+      body {
+        overflow-x: hidden;
+      }
+      
+      /* Modern Header Styles */
+      .page-header {
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        background: white;
+      }
+      
+  
+      
+      /* Hero Section */
+      .about-hero {
+        background: linear-gradient(rgba(12,12,12,0.8), rgba(12,12,12,0.8)), url('images/about-hero-1920x1080.jpg') center/cover no-repeat;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+        margin-bottom: 0;
+      }
+      
+      .about-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        animation: fadeInDown 1s ease;
+        color: #fff;
+      }
+      
+      .about-hero p {
+        font-size: 1.25rem;
+        max-width: 800px;
+        margin: 0 auto;
+        animation: fadeInUp 1s ease;
+      }
+      
+      /* Breadcrumbs */
+      .breadcrumbs-section {
+        padding: 15px 0;
+        background-color: #f5f5f5;
+      }
+      
+      /* Section Styling */
+      .about-section {
+        padding: 80px 0;
+      }
+      
+      .about-section.alternate {
+        background-color: var(--secondary);
+      }
+      
+      .section-title {
+        position: relative;
+        margin-bottom: 40px;
+        padding-bottom: 15px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      
+      .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--accent);
+      }
+      
+      .section-title.center {
+        text-align: center;
+      }
+      
+      .section-title.center:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      /* Modern Card Styles */
+      .feature-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: var(--transition);
+        height: 100%;
+        border: 1px solid #eee;
+      }
+      
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        border-color: var(--accent);
+      }
+      
+      .feature-card .card-img {
+        height: 200px;
+        overflow: hidden;
+      }
+      
+      .feature-card .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+      
+      .feature-card:hover .card-img img {
+        transform: scale(1.05);
+      }
+      
+      .feature-card .card-body {
+        padding: 25px;
+      }
+      
+      .feature-card h3 {
+        color: var(--primary);
+        margin-bottom: 15px;
+      }
+      
+      /* Timeline */
+      .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: var(--accent);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+      }
+      
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+      
+      .timeline-item:nth-child(odd) {
+        left: 0;
+      }
+      
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+      
+      .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background-color: white;
+        border: 4px solid var(--accent);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      
+      .timeline-item:nth-child(odd)::after {
+        right: -13px;
+      }
+      
+      .timeline-item:nth-child(even)::after {
+        left: -13px;
+      }
+      
+      .timeline-content {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border-left: 3px solid var(--accent);
+      }
+      
+      .timeline-date {
+        font-weight: bold;
+        color: var(--accent);
+        margin-bottom: 5px;
+      }
+      
+      /* Team Section */
+      .team-member {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      
+      .team-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        overflow: hidden;
+        border: 5px solid var(--secondary);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      
+      .team-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .team-member h4 {
+        margin-bottom: 5px;
+        color: var(--dark);
+      }
+      
+      .team-member .position {
+        color: var(--accent);
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+      
+      /* Stats Counter */
+      .stats-section {
+        background: linear-gradient(rgba(12,12,12,0.9), rgba(12,12,12,0.9)), url('images/stats-bg-1920x1080.jpg') fixed center/cover;
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+      }
+      
+      .stat-item {
+        margin-bottom: 30px;
+      }
+      
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color:#fff;
+        margin-bottom: 10px;
+      }
+      
+      .stat-label {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white;
+      }
+      
+      /* Values Section */
+      .value-item {
+        text-align: center;
+        padding: 30px;
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: var(--transition);
+        height: 100%;
+        border: 1px solid #f0f0f0;
+      }
+      
+      .value-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        border-color: var(--accent);
+      }
+      
+      .value-icon {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        background: var(--primary);
+        color: var(--accent);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        font-size: 30px;
+        border: 2px solid var(--accent);
+      }
+      
+      /* Trusted Partners */
+      .logo-marquee {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        margin: 40px 0;
+      }
+      
+      .logo-track {
+         display: flex;
+  
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+      }
+      
+      .logo-track img {
+        height: 80px;
+        margin: 0 30px;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: var(--transition);
+      }
+      
+      .logo-track img:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+      }
+      
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+      }
+      
+      .cta-section h2 {
+        margin-bottom: 20px;
+        color: white;
+      }
+      
+      .cta-section p {
+        color: rgba(255,255,255,0.9);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      .cta-button {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        padding: 15px 40px;
+        border-radius: 4px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 30px;
+        transition: var(--transition);
+        border: none;
+      }
+      
+      .cta-button:hover {
+        background: #d69a06;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        color: white;
+      }
+      
+      /* Footer */
+      .footer-classic {
+        background: var(--primary);
+        color: white;
+        padding: 60px 0 30px;
+      }
+      
+      .footer-classic .heading-5 {
+        color: var(--accent);
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+      
+      .footer-classic .text-gray-4 {
+        color: rgba(255,255,255,0.7) !important;
+      }
+      
+      .footer-classic .list-marked-2 a {
+        color: rgba(255,255,255,0.7);
+        transition: var(--transition);
+      }
+      
+      .footer-classic .list-marked-2 a:hover {
+        color: var(--accent);
+      }
+      
+      .footer-classic .rights {
+        color: rgba(255,255,255,0.5);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 20px;
+        margin-top: 30px;
+      }
+      
+      .footer-classic .rights a {
+        color: var(--accent);
+      }
+      
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes fadeInUp {
+        from { 
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to { 
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fadeInDown {
+        from { 
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to { 
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fadeInLeft {
+        from { 
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to { 
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes fadeInRight {
+        from { 
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to { 
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      .animate {
+        opacity: 0;
+      }
+      
+      .fade-in {
+        animation: fadeIn 1s ease forwards;
+      }
+      
+      .fade-in-up {
+        animation: fadeInUp 1s ease forwards;
+      }
+      
+      .fade-in-down {
+        animation: fadeInDown 1s ease forwards;
+      }
+      
+      .fade-in-left {
+        animation: fadeInLeft 1s ease forwards;
+      }
+      
+      .fade-in-right {
+        animation: fadeInRight 1s ease forwards;
+      }
+      
+      .delay-1 { animation-delay: 0.2s; }
+      .delay-2 { animation-delay: 0.4s; }
+      .delay-3 { animation-delay: 0.6s; }
+      .delay-4 { animation-delay: 0.8s; }
+      .delay-5 { animation-delay: 1s; }
+      
+      /* Responsive Adjustments */
+      @media (max-width: 1200px) {
+        .about-hero h1 {
+          font-size: 3rem;
+        }
+      }
+      
+      @media (max-width: 992px) {
+        .about-hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .timeline::after {
+          left: 31px;
+        }
+        
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+        
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+        
+        .timeline-item::after {
+          left: 20px;
+        }
+        
+        .timeline-item:nth-child(odd)::after,
+        .timeline-item:nth-child(even)::after {
+          left: 20px;
+        }
+        
+        .logo-track {
+          animation-duration: 40s;
+        }
+        
+        .logo-track img {
+          height: 60px;
+          margin: 0 20px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .about-hero {
+          padding: 80px 0;
+        }
+        
+        .about-hero h1 {
+          font-size: 2rem;
+        }
+        
+        .about-hero p {
+          font-size: 1rem;
+        }
+        
+        .about-section {
+          padding: 60px 0;
+        }
+        
+        .section-title {
+          font-size: 1.8rem;
+        }
+        
+        .stat-number {
+          font-size: 2.5rem;
+        }
+        
+        .logo-track {
+          animation-duration: 50s;
+        }
+        
+        .logo-track img {
+          height: 50px;
+          margin: 0 15px;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .about-hero {
+          padding: 60px 0;
+        }
+        
+        .about-hero h1 {
+          font-size: 1.8rem;
+        }
+        
+        .logo-track {
+          flex-wrap: wrap;
+          animation: none;
+          width: 100%;
+        }
+        
+        .logo-track img {
+          margin: 10px 15px;
+          height: 50px;
+        }
+      }
+
+      
+
+
+
+
+#languageSelector {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+}
+
+.language-btn {
+  background: #c87e0e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-btn:hover {
+  background: #0c0c0c;
+  transform: scale(1.1);
+}
+
+.language-dropdown {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  padding: 10px 0;
+  min-width: 180px;
+  display: none;
+  z-index: 10000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.language-dropdown.show {
+  display: block;
+}
+
+.language-option {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333;
+  text-align: left;
+  border: none;
+  background: none;
+  width: 100%;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.language-option:hover {
+  background: #f5f5f5;
+}
+
+.language-option.active {
+  background: #c87e0e;
+  color: white;
+}
+
+.language-flag {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* ===== TAWK.TO STYLES ===== */
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+  z-index: 9999;
+}
+.chat-btn:hover {
+  background: #0c0c0c;
+}
+
+.chat-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.chat-content {
+  position: relative;
+  width: 40%;
+  height: 80%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .chat-content {
+    width: 90%;
+    height: 85%;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Prevent Google Translate from breaking Tawk.to */
+.notranslate {
+  -webkit-translate: none !important;
+  translate: none !important;
+}
+
+/* Hide Google Translate elements */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+    </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+
+  </head>
+  
+  <body>  
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    
+    <div class="page">
+      <header class="section page-header">
+        <!--RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            
+
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!--RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!--RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                  <!--RD Navbar Brand-->
+                  <div class="rd-navbar-brand" style="width: 320px;">
+                    <!--Brand--><a class="brand" href="/"><img class="brand-logo-dark" src="images/logo-default-250x85.png" alt="" width="320" height="80"/><img class="brand-logo-light" src="images/logo-inverse-250x85.png" alt="" width="320" height="80"/></a>
+                  </div>
+                </div>
+                <div class="rd-navbar-main-element">
+                  <div class="rd-navbar-nav-wrap">
+                    <ul class="rd-navbar-nav">
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/">Home</a></li>
+                      <li class="rd-nav-item active"><a class="rd-nav-link" href="/about">About</a></li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/services">Services</a></li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/contacts">Contacts</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      
+      <!-- Hero Section -->
+<section class="about-hero">
+
+<style>
+
+
+
+
+  .about-hero {
+  position: relative;
+  padding: 80px 0;
+  text-align: center;
+  color: var(--light);
+  overflow: hidden;
+}
+.about-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(12, 12, 12, 0.7), rgba(12, 12, 12, 0.7)),
+    url("images/about-bg.jpg") center/cover no-repeat;
+  z-index: 0;
+}
+.about-hero .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+</style>
+
+
+
+
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <h1 class="fade-in-down">Our Story</h1>
+    <p class="fade-in-up">
+      For nearly three decades, World Trust Express has been connecting businesses across the globe 
+      with reliable, efficient logistics solutions tailored to their unique needs.
+    </p>
+  </div>
+</section>
+
+      
+
+      
+      <!-- About Intro Section -->
+      <section class="about-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 animate fade-in-left">
+              <h2 class="section-title">Global Logistics Excellence Since 1995</h2>
+              <p>Founded in 1995 and headquartered in Belgium, World Trust Express has grown from a regional transport provider into a truly global logistics partner. With nearly three decades of experience, we have developed the infrastructure, expertise, and international network needed to move cargo of all kinds — from small parcels to oversized industrial equipment — safely and on time.</p>
+              <p>Today, we proudly serve clients across Europe, Africa, Asia, and the Americas. Our success is built on strong partnerships with leading carriers, freight forwarders, and port authorities worldwide. This global presence enables us to offer flexible, cost-efficient shipping routes by air, sea, road, and rail, while maintaining the personalized service of a dedicated logistics team.</p>
+            </div>
+            <div class="col-lg-6 animate fade-in-right">
+              <div class="ps-lg-4 mt-5 mt-lg-0">
+                <img src="images/about-intro-650x500.jpg" alt="Global logistics network" class="img-fluid rounded shadow">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-6 animate fade-in delay-1">
+              <div class="stat-item">
+                <div class="stat-number" data-count="28">0</div>
+                <div class="stat-label">Years Experience</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 animate fade-in delay-2">
+              <div class="stat-item">
+                <div class="stat-number" data-count="150">0</div>
+                <div class="stat-label">Countries Served</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 animate fade-in delay-3">
+              <div class="stat-item">
+                <div class="stat-number" data-count="750,000">0</div>
+                <div class="stat-label">Annual Shipments</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 animate fade-in delay-4">
+              <div class="stat-item">
+                <div class="stat-number" data-count="99%">0</div>
+                <div class="stat-label">Client Satisfaction</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Services Overview -->
+      <section class="about-section alternate">
+        <div class="container">
+          <h2 class="section-title center">Our Comprehensive Services</h2>
+          <p class="text-center mb-5">We specialize in freight forwarding, heavy cargo, and project logistics — the complex shipments that demand careful planning and execution.</p>
+          
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4 animate fade-in-up delay-1">
+              <div class="feature-card">
+                <div class="card-img">
+                  <img src="images/service-air-500x300.jpg" alt="Air freight services">
+                </div>
+                <div class="card-body">
+                  <h3>Air Freight</h3>
+                  <p>Our air freight services ensure time-sensitive cargo reaches its destination quickly and securely. With partnerships with major airlines worldwide, we offer competitive rates and reliable scheduling for urgent shipments.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4 animate fade-in-up delay-2">
+              <div class="feature-card">
+                <div class="card-img">
+                  <img src="images/service-ocean-500x300.jpg" alt="Ocean freight services">
+                </div>
+                <div class="card-body">
+                  <h3>Ocean Freight</h3>
+                  <p>For larger shipments requiring cost-effective transportation, our ocean freight solutions provide reliable container and bulk shipping options with comprehensive tracking and customs clearance support.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4 animate fade-in-up delay-3">
+              <div class="feature-card">
+                <div class="card-img">
+                  <img src="images/service-land-500x300.jpg" alt="Land transportation services">
+                </div>
+                <div class="card-body">
+                  <h3>Land Transportation</h3>
+                  <p>Our road and rail services provide seamless connectivity for regional distribution. With a fleet of modern vehicles and experienced drivers, we ensure safe and timely delivery across continents.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4 animate fade-in-up delay-1">
+              <div class="feature-card">
+                <div class="card-img">
+                  <img src="images/service-heavy-500x300.jpg" alt="Height cargo and project logistics">
+                </div>
+                <div class="card-body">
+                  <h3>Heavy Cargo & Project Logistics</h3>
+                  <p>Specializing in oversized and heavy equipment transport, we handle complex project logistics with precision planning, specialized equipment, and route surveys to ensure safe delivery.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4 animate fade-in-up delay-2">
+              <div class="feature-card">
+                <div class="card-img">
+                  <img src="images/service-warehouse-500x300.jpg" alt="Warehousing and distribution services">
+                </div>
+                <div class="card-body">
+                  <h3>Warehousing & Distribution</h3>
+                  <p>Our strategically located warehouses offer secure storage with inventory management, cross-docking, and just-in-time distribution services to optimize your supply chain.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4 animate fade-in-up delay-3">
+              <div class="feature-card">
+                <div class="card-img">
+                  <img src="images/service-customs-500x300.jpg" alt="Customs brokerage services">
+                </div>
+                <div class="card-body">
+                  <h3>Customs Brokerage</h3>
+                  <p>Our experts navigate complex international regulations to ensure smooth customs clearance, documentation compliance, and duty optimization for all your shipments.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Company Timeline -->
+      <section class="about-section">
+        <div class="container">
+          <h2 class="section-title center">Our Journey</h2>
+          <p class="text-center mb-5">From humble beginnings to becoming a global logistics partner, our story is one of growth, innovation, and commitment to excellence.</p>
+          
+          <div class="timeline">
+            <div class="timeline-item animate fade-in-left">
+              <div class="timeline-content">
+                <div class="timeline-date">1995</div>
+                <h3>Foundation</h3>
+                <p>World Trust Express was established in Belgium with a focus on regional road transportation services, serving local businesses with reliable delivery solutions.</p>
+              </div>
+            </div>
+            
+            <div class="timeline-item animate fade-in-right">
+              <div class="timeline-content">
+                <div class="timeline-date">2002</div>
+                <h3>European Expansion</h3>
+                <p>We expanded our operations across Europe, establishing offices in key logistics hubs and developing partnerships with carriers throughout the continent.</p>
+              </div>
+            </div>
+            
+            <div class="timeline-item animate fade-in-left">
+              <div class="timeline-content">
+                <div class="timeline-date">2008</div>
+                <h3>Global Reach</h3>
+                <p>Entered intercontinental markets with the launch of our air and ocean freight divisions, connecting Europe with Asia and the Americas.</p>
+              </div>
+            </div>
+            
+            <div class="timeline-item animate fade-in-right">
+              <div class="timeline-content">
+                <div class="timeline-date">2015</div>
+                <h3>Technology Integration</h3>
+                <p>Implemented advanced tracking systems and digital platforms, providing clients with real-time visibility and streamlined logistics management.</p>
+              </div>
+            </div>
+            
+            <div class="timeline-item animate fade-in-left">
+              <div class="timeline-content">
+                <div class="timeline-date">2020</div>
+                <h3>Pandemic Response</h3>
+                <p>Adapted our operations to maintain supply chain continuity during global challenges, implementing safety protocols and alternative routing solutions.</p>
+              </div>
+            </div>
+            
+            <div class="timeline-item animate fade-in-right">
+              <div class="timeline-content">
+                <div class="timeline-date">2023</div>
+                <h3>Sustainability Initiative</h3>
+                <p>Launched our green logistics program, focusing on carbon footprint reduction, alternative fuels, and environmentally responsible practices.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Values Section -->
+      <section class="about-section alternate">
+
+        <style>
+          .value-item {
+  text-align: center;
+  padding: 30px 20px;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 6px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+}
+
+.value-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.value-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #0c0c0c;     /* black circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  transition: background 0.3s, color 0.3s;
+      border: none;
+}
+
+.value-icon i {
+  font-size: 28px;
+  color: #ffffff;          /* white icons */
+}
+
+.value-item:hover .value-icon {
+  background: #c87e0e;     /* gold on hover */
+}
+
+.value-item:hover .value-icon i {
+  color: #0c0c0c;          /* black icon inside gold */
+}
+
+
+        </style>
+
+
+<div class="container">
+  <h2 class="section-title center">Our Core Values</h2>
+  <p class="text-center mb-5">These principles guide everything we do, from daily operations to strategic decisions, ensuring we consistently deliver exceptional service.</p>
+  
+  <div class="row">
+    <!-- Reliability -->
+    <div class="col-lg-4 col-md-6 mb-4 animate fade-in delay-1">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h3>Reliability</h3>
+        <p>We understand that our clients depend on us to keep their supply chains moving. That's why we prioritize consistency, follow-through, and accountability in every shipment we handle.</p>
+      </div>
+    </div>
+
+    <!-- Innovation -->
+    <div class="col-lg-4 col-md-6 mb-4 animate fade-in delay-2">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Innovation</h3>
+        <p>In a rapidly changing world, we continuously invest in technology and process improvements to enhance efficiency, visibility, and sustainability across our operations.</p>
+      </div>
+    </div>
+
+    <!-- Partnership -->
+    <div class="col-lg-4 col-md-6 mb-4 animate fade-in delay-3">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3>Partnership</h3>
+        <p>We view our clients as long-term partners, working collaboratively to understand their unique challenges and develop customized solutions that drive their success.</p>
+      </div>
+    </div>
+
+    <!-- Sustainability -->
+    <div class="col-lg-4 col-md-6 mb-4 animate fade-in delay-1">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Sustainability</h3>
+        <p>We're committed to reducing our environmental impact through route optimization, modal shifts, and investing in greener technologies for a more sustainable future.</p>
+      </div>
+    </div>
+
+    <!-- Safety -->
+    <div class="col-lg-4 col-md-6 mb-4 animate fade-in delay-2">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Safety</h3>
+        <p>The well-being of our team, partners, and communities is paramount. We maintain rigorous safety standards and continuously train our staff on best practices.</p>
+      </div>
+    </div>
+
+    <!-- Expertise -->
+    <div class="col-lg-4 col-md-6 mb-4 animate fade-in delay-3">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Expertise</h3>
+        <p>Our team of logistics professionals brings decades of experience and industry knowledge to solve complex challenges and deliver optimal solutions for our clients.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </section>
+      
+      <!-- Trusted Partners -->
+      <section class="section section-md">
+        <div class="container text-center">
+          <h3 class="section-title center">Trusted & Accredited By</h3>
+          <div class="logo-marquee mt-5">
+            <div class="logo-track">
+              <img src="images/iata.png" alt="IATA accreditation">
+              <img src="images/fiata.png" alt="FIATA certification">
+              <img src="images/wca.png" alt="WCA membership">
+              <img src="images/iso.png" alt="ISO 9001 certification">
+              <img src="images/tapa.jpg" alt="TAPA security standards">
+              <img src="images/trust-pilot.jpg" alt="Trustpilot excellence">
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+      
+  
+      
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <h2>Ready to streamline your logistics?</h2>
+          <p>Join thousands of businesses that trust World Trust Express with their supply chain needs.</p>
+         <a href="/contacts"class="cta-button">Get in Touch</a>
+        </div>
+      </section>
+      
+      <footer class="section footer-classic context-dark">
+        <div class="container">
+          <div class="row row-30 justify-content-center align-items-center">
+            <div class="col-lg-3 col-md-12 text-center text-lg-start">
+              <!--Brand--><a class="brand" href="/"><img class="brand-logo-dark" src="images/logo-default-250x85.png" alt="" width="320" height="80"/><img class="brand-logo-light" src="images/logo-inverse-250x85.png" alt="" width="320" height="80"/></a>
+            </div>
+            
+            <div class="col-lg-3 col-md-4">
+              <div class="contact-detail">
+                <div class="detail-icon icon linearicons-map-marker"></div>
+                <div class="detail-info"><span>Email:</span><a href="mailto:#">wrldtrustexpress@proton.me</a></div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4">
+              <div class="contact-detail">
+                <div class="detail-icon icon linearicons-clock3"></div>
+                <div class="detail-info"><span>Opening Hours:</span><span class="text-white">Mon. - Fri. 9:00 - 18:00</span></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="divider"></div>
+            </div>
+          </div>
+          <div class="row row-50">
+            <div class="col-lg-3 col-sm-6">
+              <h6 class="heading-5">About World Trust Express</h6>
+              <p class="text-gray-4">
+                Since 1995, World Trust Express has delivered reliable logistics solutions worldwide. 
+                Headquartered in Belgium, we specialize in freight forwarding and heavy cargo, backed 
+                by a team of experienced professionals committed to efficiency and trust.
+              </p>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 d-sm-flex flex-column align-items-left align-items-lg-center">
+              <h6 class="heading-5">Quick links</h6>
+              <ul class="list-marked-2">
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contacts">Contacts</a></li>
+              </ul>
+            </div>
+
+            <div class="col-12 fadeInLeft">
+              <p class="rights"><span>&nbsp;</span><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span class="logo-name">World Trust Express</span><span>.&nbsp;</span><span>All Rights Reserved</span><span>.&nbsp;</span><a href="privacy-policy.html">Privacy Policy</a></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    
+    <!-- Custom Script for Animations -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Animation on scroll
+        const animatedElements = document.querySelectorAll('.animate');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const animationType = entry.target.classList[1];
+              entry.target.style.animationPlayState = 'running';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(el => {
+          observer.observe(el);
+        });
+        
+// Counter animation
+const counters = document.querySelectorAll('.stat-number');
+const speed = 200;
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = entry.target;
+
+      // Get raw count by stripping out non-digits
+      const rawCount = target.getAttribute('data-count');
+      const numericValue = parseInt(rawCount.replace(/[^0-9]/g, ''), 10);
+
+      // Get suffix (anything that's not a digit, e.g. %)
+      const suffix = rawCount.replace(/[0-9,]/g, '');
+
+      let current = 0;
+
+      const updateCount = () => {
+        const increment = numericValue / speed;
+
+        if (current < numericValue) {
+          current += increment;
+          target.innerText = Math.ceil(current).toLocaleString() + suffix;
+          setTimeout(updateCount, 10);
+        } else {
+          target.innerText = numericValue.toLocaleString() + suffix;
+        }
+      };
+
+      updateCount();
+      counterObserver.unobserve(target);
+    }
+  });
+}, { threshold: 1 });
+
+counters.forEach(counter => {
+  counterObserver.observe(counter);
+});
+
+      });
+    </script>
+
+
+
+
+  <div>
+
+
+<button id="openChat" class="chat-btn">
+  <i class="fas fa-comment-dots"></i>
+</button>
+
+
+<!-- Popup Overlay -->
+<div id="chatPopup" class="chat-popup">
+  <div class="chat-content">
+    <button id="closeChat" class="close-btn">&times;</button>
+    <iframe src="https://tawk.to/chat/69ec7fee5e9d251c32b388bb/1jn1t7fl8" frameborder="0"></iframe>
+  </div>
+</div>
+
+<style>
+/* Chat Button */
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+    z-index: 9999;
+}
+.chat-btn:hover {
+  background: #0c0c0c;
+}
+
+/* Overlay */
+.chat-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Chat Box */
+.chat-content {
+  position: relative;
+  width: 40%;
+  height: 80%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive: smaller screens */
+@media (max-width: 768px) {
+  .chat-content {
+    width: 90%;
+    height: 85%; /* optional: make it taller for mobile */
+  }
+}
+
+
+/* Close Button */
+
+   .close-btn {
+     position: absolute;
+    top: 12px;
+    right: 18px;
+    background: #c87e0e;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: inline-flex
+;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Iframe fills the box */
+.chat-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+
+<script>
+document.getElementById('openChat').onclick = () => {
+  document.getElementById('chatPopup').style.display = 'flex';
+};
+document.getElementById('closeChat').onclick = () => {
+  document.getElementById('chatPopup').style.display = 'none';
+};
+</script>
+
+
+</div>
+
+
+
+
+<!-- Language Selector -->
+<div id="languageSelector" class="notranslate">
+  <button id="languageBtn" class="language-btn">
+    <i class="fas fa-globe"></i>
+  </button>
+  <div id="languageDropdown" class="language-dropdown">
+    <button class="language-option active" data-lang="en">
+      <span class="language-flag">🇺🇸</span> English
+    </button>
+    <button class="language-option" data-lang="fr">
+      <span class="language-flag">🇫🇷</span> Français
+    </button>
+    <button class="language-option" data-lang="es">
+      <span class="language-flag">🇪🇸</span> Español
+    </button>
+    <button class="language-option" data-lang="de">
+      <span class="language-flag">🇩🇪</span> Deutsch
+    </button>
+    <button class="language-option" data-lang="it">
+      <span class="language-flag">🇮🇹</span> Italiano
+    </button>
+    <button class="language-option" data-lang="pt">
+      <span class="language-flag">🇵🇹</span> Português
+    </button>
+    <button class="language-option" data-lang="nl">
+      <span class="language-flag">🇳🇱</span> Nederlands
+    </button>
+    <button class="language-option" data-lang="ru">
+      <span class="language-flag">🇷🇺</span> Русский
+    </button>
+    <button class="language-option" data-lang="zh">
+      <span class="language-flag">🇨🇳</span> 中文
+    </button>
+    <button class="language-option" data-lang="ja">
+      <span class="language-flag">🇯🇵</span> 日本語
+    </button>
+    <button class="language-option" data-lang="ko">
+      <span class="language-flag">🇰🇷</span> 한국어
+    </button>
+    <button class="language-option" data-lang="ar">
+      <span class="language-flag">🇸🇦</span> العربية
+    </button>
+    <button class="language-option" data-lang="hi">
+      <span class="language-flag">🇮🇳</span> हिन्दी
+    </button>
+    <button class="language-option" data-lang="tr">
+      <span class="language-flag">🇹🇷</span> Türkçe
+    </button>
+  </div>
+</div>
+
+<!-- ===== LANGUAGE SELECTOR SCRIPT ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Language Selector Elements
+  const languageBtn = document.getElementById('languageBtn');
+  const languageDropdown = document.getElementById('languageDropdown');
+  const languageOptions = document.querySelectorAll('.language-option');
+  
+// Complete list of supported languages (matching your HTML)
+const supportedLanguages = {
+    'en': 'English',
+    'fr': 'Français',
+    'es': 'Español',
+    'de': 'Deutsch',      // German 🇩🇪
+    'it': 'Italiano',
+    'pt': 'Português',
+    'nl': 'Nederlands',   // Dutch 🇳🇱
+    'ru': 'Русский',
+    'zh': '中文',
+    'ja': '日本語',
+    'ko': '한국어',
+    'ar': 'العربية',
+    'hi': 'हिन्दी',
+    'tr': 'Türkçe'
+};
+
+// Google Translate language codes mapping
+const googleLangCodes = {
+    'en': 'en',
+    'fr': 'fr',
+    'es': 'es',
+    'de': 'de',           // German maps to 'de'
+    'it': 'it',
+    'pt': 'pt',
+    'nl': 'nl',           // Dutch maps to 'nl'
+    'ru': 'ru',
+    'zh': 'zh-CN',        // Chinese Simplified
+    'ja': 'ja',
+    'ko': 'ko',
+    'ar': 'ar',
+    'hi': 'hi',
+    'tr': 'tr'
+};
+  // Toggle dropdown
+  if (languageBtn) {
+    languageBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('show');
+    });
+  }
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function() {
+    languageDropdown.classList.remove('show');
+  });
+  
+  // Prevent dropdown from closing when clicking inside
+  if (languageDropdown) {
+    languageDropdown.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+  
+  // Language selection
+  if (languageOptions.length > 0) {
+    languageOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        
+        // Update active state
+        languageOptions.forEach(opt => opt.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Translate page
+        translatePage(lang);
+        
+        // Close dropdown
+        languageDropdown.classList.remove('show');
+        
+        // Save preference
+        localStorage.setItem('preferredLanguage', lang);
+      });
+    });
+  }
+  
+  // Tawk.to Chat Elements
+  const openChatBtn = document.getElementById('openChat');
+  const closeChatBtn = document.getElementById('closeChat');
+  const chatPopup = document.getElementById('chatPopup');
+  
+  // Chat functionality
+  if (openChatBtn && chatPopup) {
+    openChatBtn.addEventListener('click', () => {
+      chatPopup.style.display = 'flex';
+    });
+  }
+  
+  if (closeChatBtn && chatPopup) {
+    closeChatBtn.addEventListener('click', () => {
+      chatPopup.style.display = 'none';
+    });
+  }
+  
+  // Close chat when clicking outside
+  if (chatPopup) {
+    chatPopup.addEventListener('click', (e) => {
+      if (e.target === chatPopup) {
+        chatPopup.style.display = 'none';
+      }
+    });
+  }
+  
+  // Translation system
+  let googleTranslateInitialized = false;
+  
+  function translatePage(targetLang) {
+    // Convert to Google Translate language code if needed
+    const googleLang = googleLangCodes[targetLang] || targetLang;
+    
+    // If Google Translate is already initialized, change language
+    if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = googleLang;
+        select.dispatchEvent(new Event('change'));
+        return;
+      }
+    }
+    
+    // Initialize Google Translate for the first time
+    if (!googleTranslateInitialized) {
+      initializeGoogleTranslate(googleLang);
+      googleTranslateInitialized = true;
+    }
+  }
+  
+  function initializeGoogleTranslate(targetLang) {
+    // Remove any existing Google Translate elements
+    const existingElement = document.getElementById('google_translate_element');
+    if (existingElement) {
+      existingElement.remove();
+    }
+    
+    // Create Google Translate div (hidden)
+    const translateDiv = document.createElement('div');
+    translateDiv.id = 'google_translate_element';
+    translateDiv.style.display = 'none';
+    document.body.appendChild(translateDiv);
+    
+    // Load Google Translate script if not already loaded
+    if (!document.querySelector('script[src*="translate.google.com"]')) {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.head.appendChild(script);
+    } else {
+      // If already loaded, call init directly
+      if (window.google && window.google.translate) {
+        googleTranslateElementInit();
+      }
+    }
+    
+    // Initialize function
+    window.googleTranslateElementInit = function() {
+      if (!window.google || !window.google.translate) {
+        console.error('Google Translate failed to load');
+        return;
+      }
+      
+      // Create comma-separated list of all supported languages
+      const allLangCodes = Object.values(googleLangCodes).join(',');
+      
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: allLangCodes,
+        layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+        autoDisplay: false
+      }, 'google_translate_element');
+      
+      // Set to target language after a delay
+      setTimeout(() => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = targetLang;
+          select.dispatchEvent(new Event('change'));
+        }
+      }, 500);
+      
+      // Hide Google Translate banner and toolbar
+      const style = document.createElement('style');
+      style.textContent = `
+        .goog-te-banner-frame, 
+        .goog-te-menu-value, 
+        .goog-te-gadget,
+        .goog-te-menu-value span,
+        .goog-te-menu-value img {
+          display: none !important;
+        }
+        body {
+          top: 0px !important;
+        }
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+          display: none !important;
+        }
+        .goog-te-spinner-pos {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+  }
+  
+  // Check for saved language preference
+  function checkSavedLanguage() {
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang && savedLang !== 'en') {
+      // Find and click the corresponding language option
+      languageOptions.forEach(option => {
+        if (option.getAttribute('data-lang') === savedLang) {
+          option.click();
+        }
+      });
+    }
+  }
+  
+  // Auto-detect browser language
+  function detectBrowserLanguage() {
+    const browserLang = navigator.language || navigator.userLanguage;
+    const supportedLangs = Object.keys(supportedLanguages);
+    
+    // Check if browser language is supported and not English
+    const baseLang = browserLang.split('-')[0];
+    if (supportedLangs.includes(baseLang) && baseLang !== 'en') {
+      // Only auto-translate if user hasn't made a choice
+      if (!localStorage.getItem('preferredLanguage')) {
+        setTimeout(() => {
+          languageOptions.forEach(option => {
+            if (option.getAttribute('data-lang') === baseLang) {
+              option.click();
+            }
+          });
+        }, 1000);
+      }
+    }
+  }
+  
+  // Set active state based on saved language on page load
+  function setInitialActiveState() {
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang) {
+      languageOptions.forEach(option => {
+        if (option.getAttribute('data-lang') === savedLang) {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+    } else {
+      // Default to English active
+      languageOptions.forEach(option => {
+        if (option.getAttribute('data-lang') === 'en') {
+          option.classList.add('active');
+        }
+      });
+    }
+  }
+  
+  // Initialize on page load
+  setInitialActiveState();
+  
+  setTimeout(() => {
+    checkSavedLanguage();
+    detectBrowserLanguage();
+  }, 500);
+});
+</script>
+
+
+  </body>
+
+
+
+
+
+
+
+
+
+</html>

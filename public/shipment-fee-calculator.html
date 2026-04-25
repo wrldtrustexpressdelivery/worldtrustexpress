@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Trust Express - Shipment Fee Calculator</title>
+
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+<!-- Material Icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --bg: #fff;
+  --card: #1f1f1f;
+  --text: #fff;
+  --primary: #c87e0e;
+  --primary-hover:#d13f3f;
+
+  --success: #059c3f;
+  --radius: 12px;
+  --gap: 14px;
+}
+
+/* Layout */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: var(--text);
+  flex-direction: column;
+}
+
+/* Logo */
+.logo-container {
+  margin-bottom: 18px;
+  padding: 1rem;
+}
+.logo-container img {
+  width: 150px;
+  object-fit: cover;
+}
+
+/* Modal */
+.modal {
+  background: var(--card);
+  padding: 22px;
+  border-radius: var(--radius);
+  
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.material-symbols-outlined {
+  font-size: 26px;
+  color: var(--primary);
+}
+
+/* Steps */
+.step {
+  display: none;
+  flex-direction: column;
+  gap: var(--gap);
+}
+.step.active {
+  display: flex;
+}
+
+/* Inputs + Buttons */
+input[type="text"], button {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  color: #000; /* input text dark for readability */
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+button:hover { background: var(--primary-hover); }
+
+button .spinner {
+  display: none;
+  border: 2px solid #fff;
+  border-top: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.6s linear infinite;
+  margin-left: 8px;
+}
+button.loading .spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg);} }
+
+/* Options */
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.options input {
+  accent-color: var(--primary);
+}
+
+/* Instructions */
+.instructions {
+  background: rgba(112, 96, 3, 0.2);
+  padding: 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+  text-align: left;
+}
+.instructions b {
+  font-weight: 700;
+  color: #fff;
+  word-break: break-word;
+}
+
+/* Snackbar */
+.snackbar {
+  opacity: 0;
+  min-width: 250px;
+  background: var(--primary);
+  text-align: center;
+  border-radius: 6px;
+  padding: 12px;
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 99999;
+  color: #fff;
+  font-size: 14px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.snackbar.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.snackbar.success { background-color: var(--success); }
+
+
+
+#languageSelector {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+}
+
+.language-btn {
+  background: #c87e0e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-btn:hover {
+  background: #0c0c0c;
+  transform: scale(1.1);
+}
+
+.language-dropdown {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  padding: 10px 0;
+  min-width: 180px;
+  display: none;
+  z-index: 10000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.language-dropdown.show {
+  display: block;
+}
+
+.language-option {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333;
+  text-align: left;
+  border: none;
+  background: none;
+  width: 100%;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.language-option:hover {
+  background: #f5f5f5;
+}
+
+.language-option.active {
+  background: #c87e0e;
+  color: white;
+}
+
+.language-flag {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* ===== TAWK.TO STYLES ===== */
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+  z-index: 9999;
+}
+.chat-btn:hover {
+  background: #0c0c0c;
+}
+
+.chat-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.chat-content {
+  position: relative;
+  width: 40%;
+  height: 80%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .chat-content {
+    width: 90%;
+    height: 85%;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  background: #c87e0e;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Prevent Google Translate from breaking Tawk.to */
+.notranslate {
+  -webkit-translate: none !important;
+  translate: none !important;
+}
+
+/* Hide Google Translate elements */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+</style>
+</head>
+<body>
+
+<div class="logo-container">
+  <img src="images/logo-default-250x85.png" alt="Logo">
+</div>
+
+<div class="modal">
+  <h2><span class="material-symbols-outlined">payments</span> Shipment Fee Calculator</h2>
+
+  <!-- Step 1: Tracking Number -->
+  <div id="step1" class="step active">
+    <input type="text" id="trackingInput" placeholder="Enter tracking number">
+    <button class="btn-primary" onclick="goToStep2()">Go <span class="spinner"></span></button>
+  </div>
+
+  <!-- Step 2: Payment Method -->
+  <div id="step2" class="step">
+    <p id="shipmentMessage"></p>
+    <div class="options">
+      <label><input type="radio" name="paymentMethod" value="bank" onchange="showStep3()"> Bank Transfer</label>
+      <label><input type="radio" name="paymentMethod" value="crypto" onchange="showStep3()"> Cryptocurrency</label>
+      <label><input type="radio" name="paymentMethod" value="giftcard" onchange="showStep3()"> Gift Card</label>
+    </div>
+    <button class="btn-primary" onclick="backToStep1()">Cancel <span class="spinner"></span></button>
+  </div>
+
+  <!-- Step 3: Upload / Instructions -->
+  <div id="step3" class="step">
+    <div id="instructions" class="instructions"></div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <button id="copyWalletBtn" class="btn-primary" onclick="copyWallet()" style="display:none;">Copy Wallet Address</button>
+      <button id="uploadBtn" class="btn-primary" onclick="document.getElementById('fileInput').click()">Upload Proof <span class="spinner"></span></button>
+      <button id="backStep3Btn" class="btn-primary" onclick="backToStep2()">Back</button>
+    </div>
+    <input type="file" id="fileInput" class="hidden" accept="image/*,application/pdf" style="display:none;" onchange="handleFileUpload(event)">
+  </div>
+</div>
+
+<div id="snackbar" class="snackbar"></div>
+
+<script type="module" src="js/supabase-client.js"></script>
+<script>
+const CRYPTO_ASSET = "Bitcoin";
+const CRYPTO_WALLET_ADDRESS = "bc1qu4mm98hgk45w59fr3r0zsczz6vuf8vlk4vl4dy";
+
+let currentTracking = "";
+let currentAmount = 0;
+let selectedMethod = null;
+
+// Snackbar
+function showSnackbar(msg, type="error") {
+  const bar = document.getElementById("snackbar");
+  bar.innerText = msg;
+  bar.classList.remove("error","success","show");
+  bar.classList.add(type,"show");
+  setTimeout(() => bar.classList.remove("show", type), 3000);
+}
+
+// Button spinner helper
+function setButtonLoading(button, isLoading=true){
+  if(isLoading){
+    button.disabled = true;
+    button.classList.add("loading");
+  } else {
+    button.disabled = false;
+    button.classList.remove("loading");
+  }
+}
+
+
+// =================== HELPER FUNCTIONS ===================
+function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    
+    try {
+        const date = new Date(dateString);
+        
+        // Check if date is valid
+        if (isNaN(date.getTime())) {
+            return 'Invalid date';
+        }
+        
+        // Format as YYYY-MM-DD HH:MM
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    } catch (error) {
+        console.error('Error formatting date:', error, dateString);
+        return dateString || 'N/A';
+    }
+}
+
+function formatDateForInput(dateString) {
+    if (!dateString) return '';
+    
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '';
+        
+        return date.toISOString().split('T')[0];
+    } catch (error) {
+        return '';
+    }
+}
+
+
+// Reset form and navigate home
+function resetFormAndGoHome() {
+  toggleStep(3, false);
+  toggleStep(2, false);
+  toggleStep(1, true);
+
+  document.getElementById("trackingInput").value = '';
+  document.querySelectorAll('input[name="paymentMethod"]').forEach(r => r.checked = false);
+  document.getElementById("instructions").innerHTML = '';
+  document.getElementById("shipmentMessage").innerText = '';
+  currentTracking = '';
+  currentAmount = 0;
+  selectedMethod = null;
+
+  window.location.href = "/";
+}
+
+// Step 1 → Step 2
+// Step 1 → Step 2
+async function goToStep2() {
+  const goBtn = document.querySelector('#step1 button');
+  setButtonLoading(goBtn, true);
+  const val = document.getElementById("trackingInput").value.trim();
+
+  if (!val) {
+    setButtonLoading(goBtn, false);
+    return showSnackbar("Please enter a tracking number", "error");
+  }
+
+  try {
+    // Get shipment with bills
+    const { data: shipment, error: shipmentError } = await supabase.from("shipments")
+      .select(`
+        id, 
+        tracking_id, 
+        shipping_fee, 
+        shipping_fee_status,
+        bills (
+          amount, 
+          status,
+          bill_name
+        )
+      `)
+      .eq("tracking_id", val)
+      .single();
+
+    if (shipmentError || !shipment) {
+      setButtonLoading(goBtn, false);
+      return showSnackbar(`${val} is not a valid tracking number`, "error");
+    }
+
+    currentTracking = shipment.tracking_id;
+    const bills = shipment.bills || [];
+
+    // Calculate breakdown
+    let breakdownHTML = '';
+    let totalOutstanding = 0;
+
+    // Shipping fee
+    if (shipment.shipping_fee && shipment.shipping_fee > 0) {
+      const fee = parseFloat(shipment.shipping_fee);
+      if (shipment.shipping_fee_status === 'unpaid') {
+        totalOutstanding += fee;
+        breakdownHTML += `<div>• Shipping Fee: $${fee.toFixed(2)}</div>`;
+      } else if (shipment.shipping_fee_status === 'partial') {
+        totalOutstanding += fee / 2;
+        breakdownHTML += `<div>• Shipping Fee (partial): $${(fee / 2).toFixed(2)} of $${fee.toFixed(2)}</div>`;
+      }
+    }
+
+    // Bills
+    bills.forEach(bill => {
+      const amount = parseFloat(bill.amount) || 0;
+      const billName = bill.bill_name || 'Additional Bill';
+      
+      if (bill.status === 'unpaid' && amount > 0) {
+        totalOutstanding += amount;
+        breakdownHTML += `<div>• ${billName}: $${amount.toFixed(2)}</div>`;
+      } else if (bill.status === 'partial' && amount > 0) {
+        totalOutstanding += amount / 2;
+        breakdownHTML += `<div>• ${billName} (partial): $${(amount / 2).toFixed(2)} of $${amount.toFixed(2)}</div>`;
+      }
+    });
+
+    const paymentSection = document.querySelector('.options');
+    
+    if (totalOutstanding === 0) {
+      document.getElementById("shipmentMessage").innerText =
+        "This shipment doesn't have any outstanding payment.";
+      paymentSection.style.display = "none";
+    } else {
+      currentAmount = totalOutstanding;
+      document.getElementById("shipmentMessage").innerHTML = `
+        <p><strong>Total Outstanding: $${currentAmount.toFixed(2)}</strong></p>
+        <div style="font-size: 14px; margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 6px;">
+          ${breakdownHTML || 'No itemized breakdown available.'}
+        </div>
+        <p style="margin-top: 10px;">Please select a payment method:</p>
+      `;
+      paymentSection.style.display = "flex";
+    }
+
+    toggleStep(1, false);
+    toggleStep(2, true);
+
+  } catch (err) {
+    console.error("Error fetching shipment:", err);
+    showSnackbar("Failed to fetch shipment", "error");
+  }
+
+  setButtonLoading(goBtn, false);
+}
+// Step 2 → Step 1
+function backToStep1(){
+  toggleStep(2, false);
+  toggleStep(1, true);
+  document.querySelectorAll('input[name="paymentMethod"]').forEach(r=>r.checked=false);
+  selectedMethod = null;
+}
+
+// Step 2 → Step 3
+function showStep3(){
+  selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || null;
+  const ins = document.getElementById("instructions");
+  const copyBtn = document.getElementById("copyWalletBtn");
+  const uploadBtn = document.getElementById("uploadBtn");
+
+  if(selectedMethod === "bank"){
+    ins.innerHTML = `
+      <p>Please pay <b>$${currentAmount}</b> via bank transfer to:</p>
+      <p><b>Bank Name:</b> Bluevaault LLC</p>
+      <p><b>Account Number:</b> 3101 2698 5517</p>
+      <p><b>Account Name:</b> World Trust Express</p>
+      <p>After payment, upload a screenshot or PDF of your bank transfer receipt.</p>`;
+    copyBtn.style.display = "none";
+    uploadBtn.innerHTML = 'Upload Bank Receipt <span class="spinner"></span>';
+  } else if(selectedMethod === "crypto"){
+    ins.innerHTML = `
+      <p>Send the equivalent of <b>$${currentAmount}</b> in Bitcoin to the wallet below:</p>
+      <p><b>${CRYPTO_WALLET_ADDRESS}</b></p>
+      <p>After payment, upload a screenshot or PDF of your transaction.</p>`;
+    copyBtn.style.display = "inline-flex";
+    uploadBtn.innerHTML = 'Upload Payment Receipt <span class="spinner"></span>';
+  } else if(selectedMethod === "giftcard"){
+    ins.innerHTML = `
+      <p>Purchase a gift card (Steam, Sephora, or Razer Gold) worth <b>$${currentAmount}</b>.</p>
+      <p>Scratch to reveal the code and upload a clear photo or PDF.</p>`;
+    copyBtn.style.display = "none";
+    uploadBtn.innerHTML = 'Upload Gift Card <span class="spinner"></span>';
+  }
+
+  toggleStep(2, false);
+  toggleStep(3, true);
+}
+
+// Step 3 → Step 2
+function backToStep2(){
+  toggleStep(3, false);
+  toggleStep(2, true);
+}
+
+// Copy crypto wallet
+function copyWallet(){
+  navigator.clipboard.writeText(CRYPTO_WALLET_ADDRESS)
+    .then(()=> showSnackbar("Wallet address copied!","success"))
+    .catch(()=> showSnackbar("Failed to copy wallet","error"));
+}
+
+async function handleFileUpload(e){
+  const uploadBtn = document.getElementById("uploadBtn");
+  setButtonLoading(uploadBtn,true);
+  const file = e.target.files[0];
+  if(!file){ setButtonLoading(uploadBtn,false); return; }
+
+  try {
+    // Upload to Cloudinary
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "phontos");
+
+    const res = await fetch("https://api.cloudinary.com/v1_1/drzqblj9k/auto/upload", {
+      method: "POST",
+      body: formData
+    });
+    const data = await res.json();
+    const fileUrl = data.secure_url;
+
+    // Get shipment details first
+    const { data: shipment } = await supabase.from("shipments")
+      .select("id, tracking_id")
+      .eq("tracking_id", currentTracking)
+      .single();
+
+    if (!shipment) {
+      throw new Error("Shipment not found");
+    }
+
+    // 1. Save receipt to database with PENDING status
+    const { data: receipt, error: receiptError } = await supabase
+      .from('payment_receipts')
+      .insert([{
+        shipment_id: shipment.id,
+        tracking_id: currentTracking,
+        payment_method: selectedMethod,
+        amount: currentAmount,
+        proof_url: fileUrl,
+        uploaded_by: 'customer',
+        status: 'pending_verification',
+        created_at: new Date().toISOString()
+      }])
+      .select()
+      .single();
+
+    if (receiptError) {
+      console.error("Error saving receipt:", receiptError);
+    }
+
+    // 2. Find the existing unpaid bill and update it to PENDING
+    const { data: existingBill, error: findBillError } = await supabase
+      .from('bills')
+      .select('id, bill_name')
+      .eq('shipment_id', shipment.id)
+      .eq('status', 'unpaid')
+      .maybeSingle();
+
+    if (findBillError) {
+      console.error("Error finding existing bill:", findBillError);
+    }
+
+    if (existingBill) {
+      // Update the existing bill to pending
+      const { error: updateBillError } = await supabase
+        .from('bills')
+        .update({ 
+          status: 'pending',
+          description: `Payment initiated via ${selectedMethod} - awaiting verification. Receipt: ${fileUrl}`,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', existingBill.id);
+
+      if (updateBillError) {
+        console.error("Error updating bill to pending:", updateBillError);
+      } else {
+        console.log(`✅ Bill ${existingBill.bill_name} updated to pending status`);
+      }
+    } else {
+      // If no unpaid bill found, create a new pending bill (fallback)
+      console.log("No unpaid bill found, creating new pending bill");
+      const billName = selectedMethod === 'bank' ? 'Bank Transfer Payment' :
+                       selectedMethod === 'crypto' ? 'Cryptocurrency Payment' :
+                       'Gift Card Payment';
+      
+      await supabase
+        .from('bills')
+        .insert([{
+          shipment_id: shipment.id,
+          bill_name: billName,
+          amount: currentAmount,
+          status: 'pending',
+          description: `Payment via ${selectedMethod} - awaiting verification. Receipt: ${fileUrl}`,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }]);
+    }
+
+    // 3. Call backend API to send emails
+    await fetch("/api/paymentConfirmation",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        tracking: currentTracking,
+        method: selectedMethod,
+        amount: currentAmount,
+        proofUrl: fileUrl,
+        receipt_id: receipt?.id || null
+      })
+    });
+
+    setButtonLoading(uploadBtn,false);
+
+    // Show success modal
+    const successModal = document.getElementById("successModal");
+    successModal.style.display = "flex";
+    
+    document.querySelector('#successModal .success-content p').innerHTML = 
+      "Payment receipt uploaded successfully!<br><br>" +
+      "Your payment is now <strong>pending verification</strong>.<br>" +
+      "The bill status has been updated to pending.<br>" +
+      "Our team will verify your payment within 24-48 hours.";
+    
+    const successBtn = document.getElementById("successOkBtn");
+    successBtn.onclick = function() {
+      successModal.style.display = "none";
+      // Reset form
+      toggleStep(3, false);
+      toggleStep(2, false);
+      toggleStep(1, true);
+      
+      document.getElementById("trackingInput").value = '';
+      document.querySelectorAll('input[name="paymentMethod"]').forEach(r => r.checked = false);
+      document.getElementById("instructions").innerHTML = '';
+      document.getElementById("shipmentMessage").innerText = '';
+      currentTracking = '';
+      currentAmount = 0;
+      selectedMethod = null;
+      
+      showSnackbar("Receipt uploaded for verification!", "success");
+    };
+
+  } catch(err){
+    console.error("Upload error:", err);
+    setButtonLoading(uploadBtn,false);
+    showSnackbar("Upload failed. See console","error");
+  }
+}
+
+function toggleStep(stepNum, show=true){
+  const stepDiv = document.getElementById(`step${stepNum}`);
+  if(show){
+    stepDiv.classList.add("active");
+    stepDiv.style.display = "flex";
+  } else {
+    stepDiv.classList.remove("active");
+    stepDiv.style.display = "none";
+  }
+}
+</script>
+
+<!-- Success Modal -->
+<div id="successModal" class="success-modal">
+
+<style>
+
+
+
+
+  /* Success Modal Styles */
+.success-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.849);
+  display: none;           /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.success-content {
+    background: #fff;
+    color: var(--text);
+    padding: 22px;
+    border-radius: var(--radius);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    font-size: 16px;
+}
+
+.success-content button {
+  margin-top: 16px;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.success-content button:hover {
+  background: var(--primary-hover);
+}
+
+.success-content p {
+                
+  color: #000;                     
+
+  text-align: center;        
+  font-weight: 500;         
+  
+  word-wrap: break-word;             
+}
+
+</style>
+
+
+
+  <div class="success-content">
+    <p>Payment receipt sent successfully.<br>Shipment will be updated accordingly.</p>
+    <button id="successOkBtn">Okay</button>
+  </div>
+</div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

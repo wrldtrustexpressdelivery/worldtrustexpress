@@ -1,0 +1,49 @@
+{
+  "functions": {
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/newShipment",
+        "function": "newShipment"
+      },
+      {
+        "source": "/api/paymentConfirmation",
+        "function": "paymentConfirmation"
+      },
+      {
+        "source": "/about",
+        "destination": "/about.html"
+      },
+      {
+        "source": "/contacts",
+        "destination": "/contacts.html"
+      },
+      {
+        "source": "/services",
+        "destination": "/services.html"
+      },
+      {
+        "source": "/koom",
+        "destination": "/control-panel.html"
+      },
+      {
+        "source": "/shipment-fee-calculator",
+        "destination": "/shipment-fee-calculator.html"
+      },
+      {
+        "source": "/",
+        "destination": "/index.html"
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
+}
